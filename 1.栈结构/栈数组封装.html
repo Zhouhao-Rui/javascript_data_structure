@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Stack() {
+        // 栈中的属性
+        this.items = []
+
+        // 栈的相关操作
+        Stack.prototype.push = (element) => {
+            this.items.push(element)
+        }
+        // 将元素压入栈
+        Stack.prototype.pop = (element) => {
+            this.items.pop(element)
+        }
+        // 从栈中取出元素
+        Stack.prototype.peak = (element) => {
+            return this.items[this.items.length - 1]
+        }
+        // 查看一下栈顶元素
+        Stack.prototype.isEmpty = () => {
+            return this.items.length == 0
+        }
+        // 判断栈是否为空
+        Stack.prototype.size = () => {
+            return this.items.length
+        }
+        // 获取栈中的元素个数
+        Stack.prototype.toString = () => {
+            let full_string = ''
+            for (let i of this.items) {
+                full_string += i + " "
+            }
+            return full_string
+        }
+        // 转为字符串
+    }
+
+    const stack = new Stack()
+    stack.push(20)
+    stack.push(10)
+    stack.push(100)
+    stack.push(66)
+    stack.pop()
+    console.log(stack.isEmpty())
+    console.log(stack.size())
+    console.log(stack)
+    console.log(stack.toString())
+
+    // 十进制转二进制代码
+    function dec2bin(dec_num) {
+        const stack = new Stack()
+        console.log(stack)
+        while (dec_num > 0) {
+            // 获取余数，放到栈中
+            // console.log(dec_num % 2)
+            stack.push(dec_num % 2)
+            // 获取整除后的结果
+            dec_num = Math.floor(dec_num / 2)
+
+        }
+        // 从栈中取出0和1
+        let binary_str = ''
+        while (! stack.isEmpty()) {
+            binary_str += stack.pop()
+        }
+        return binary_str
+    }
+    console.log(dec2bin(1000))
+</script>
+</body>
+</html>

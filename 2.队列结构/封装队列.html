@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // 封装一个队列类
+    function Queue() {
+        this.items = []
+        // 将元素加入到元素中
+        // 删除元素
+        // 查看前端的元素
+        // 查看队列是否为空
+        // 查看队列中元素的个数
+        // toString
+        Queue.prototype.enqueue = (item) => {
+            this.items.push(item)
+        }
+        Queue.prototype.dequeue = () => {
+            return this.items.shift()
+        }
+
+        Queue.prototype.front = () => {
+            return this.items[0]
+        }
+
+        Queue.prototype.isEmpty = () => {
+            return this.items.length == 0
+        }
+
+        Queue.prototype.size = () => {
+            return this.items.length
+        }
+
+        Queue.prototype.toString = () => {
+            let result_str = ''
+
+            for (let i = 0; i < this.items.length; i++) {
+                result_str += this.items[i] + ' '
+            }
+            return result_str
+        }
+    }
+
+    // 使用队列
+    const queue = new Queue()
+    queue.enqueue('abc')
+    queue.enqueue('bsa')
+    queue.enqueue('lks')
+    console.log(queue)
+
+    /**
+     * 实现击鼓传花
+     */
+
+    function pass_game(name_list, number) {
+        // 1.创建一个队列结构
+        const queue = new Queue()
+        for (let i = 0; i < name_list.length; i++) {
+            queue.enqueue(name_list[i])
+        }
+        // 2. 开始数数字，不是number的时候，重新加入到末尾
+        while (queue.size() > 1) {
+
+            for (let i = 0; i < number - 1; i++) {
+                // 先删除再加入队列
+                queue.enqueue(queue.dequeue())
+            }
+            // 如果不是number，将其删除
+            queue.dequeue()
+        }
+        // 获取剩下的那个人
+        console.log('最终剩下的人', queue.front())
+        return name_list.indexOf(queue.front())
+    }
+
+    const index = pass_game(['shs', 'afas', 'saf', 'vc', 'afw', 'sd'], 5)
+
+    console.log(index)
+</script>
+</body>
+</html>
